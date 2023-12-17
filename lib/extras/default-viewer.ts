@@ -18,7 +18,7 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
   const raycaster = new OBC.SimpleRaycaster(viewer)
   viewer.raycaster = raycaster
 
-  viewer.init()
+  await viewer.init()
   camera.updateAspect()
   renderer.postproduction.enabled = true
 
@@ -42,33 +42,17 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
   const propsProcessor = new OBC.IfcPropertiesProcessor(viewer)
 
   const propsFinder = new OBC.IfcPropertiesFinder(viewer)
-  await propsFinder.init()
+  propsFinder.init()
 
   propsFinder.onFound.add(result => {
-    const fragmentMap: { [fragmentID: string]: string[] } = {}
-    for (const modelID in result) {
-      const model = fragmentManager.groups.find(m => m.uuid === modelID)
-      if (!model) continue;
-      const expressIDs = result[modelID]
-      expressIDs.forEach(expressID => {
-        const data = model.data[Number(expressID)]
-        if (!data) return;
-        for (const key of data[0]) {
-          const fragmentID = model.keyFragments[key]
-          if (!fragmentMap[fragmentID]) fragmentMap[fragmentID] = [];
-          fragmentMap[fragmentID].push(String(expressID))
-        }
-      } )
-    }
-    //@ts-ignore
-    highlighter.highlightByID("select", fragmentMap)
+    highlighter.highlightByID("select", result)
   })
 
   const fragmentBB = new OBC.FragmentBoundingBox(viewer)
 
   const ifcLoader = new OBC.FragmentIfcLoader(viewer)
   ifcLoader.settings.wasm = {
-    path: "https://unpkg.com/web-ifc@0.0.44/",
+    path: "https://unpkg.com/web-ifc@0.0.46/",
     absolute: true
   }
 
