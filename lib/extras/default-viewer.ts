@@ -3,9 +3,7 @@ import * as THREE from "three"
 import { FragmentsGroup } from "bim-fragment"
 import { ViewerSetup } from "../index"
 
-export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, container: HTMLDivElement, name: string) => {
-  viewer.onInitialized.add(() => console.warn(`'${name}' viewer succesfully initialized!`, viewer) )
-
+export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, container: HTMLDivElement) => {
   const sceneComponent = new OBC.SimpleScene(viewer)
   sceneComponent.setup()
   viewer.scene = sceneComponent
