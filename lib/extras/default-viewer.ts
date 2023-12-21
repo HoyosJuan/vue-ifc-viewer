@@ -28,18 +28,18 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
   const grid = new OBC.SimpleGrid(viewer, new THREE.Color(0x414141))
   renderer.postproduction.customEffects.excludedMeshes.push(grid.get())
 
-  const cubeMap = new OBC.CubeMap(viewer)
+  const cubeMap = viewer.tools.get(OBC.CubeMap)
   cubeMap.setPosition("bottom-right")
 
-  const fragmentManager = new OBC.FragmentManager(viewer)
+  const fragmentManager = viewer.tools.get(OBC.FragmentManager)
 
-  const highlighter = new OBC.FragmentHighlighter(viewer)
+  const highlighter = viewer.tools.get(OBC.FragmentHighlighter)
   await highlighter.setup()
 
-  const culler = new OBC.ScreenCuller(viewer)
+  const culler = viewer.tools.get(OBC.ScreenCuller)
   camera.controls.addEventListener("sleep", () => culler.needsUpdate = true)
 
-  const propsProcessor = new OBC.IfcPropertiesProcessor(viewer)
+  const propsProcessor = viewer.tools.get(OBC.IfcPropertiesProcessor)
 
   const propsFinder = new OBC.IfcPropertiesFinder(viewer)
   propsFinder.init()
@@ -48,9 +48,9 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
     highlighter.highlightByID("select", result)
   })
 
-  const fragmentBB = new OBC.FragmentBoundingBox(viewer)
+  const fragmentBB = viewer.tools.get(OBC.FragmentBoundingBox)
 
-  const ifcLoader = new OBC.FragmentIfcLoader(viewer)
+  const ifcLoader = viewer.tools.get(OBC.FragmentIfcLoader)
   ifcLoader.settings.wasm = {
     path: "https://unpkg.com/web-ifc@0.0.46/",
     absolute: true
@@ -70,7 +70,7 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
     setTimeout(() => camera.fit(), 1)
   })
 
-  const propsManager = new OBC.IfcPropertiesManager(viewer)
+  const propsManager = viewer.tools.get(OBC.IfcPropertiesManager)
   propsProcessor.propertiesManager = propsManager
 
   const highlighterEvents = highlighter.events

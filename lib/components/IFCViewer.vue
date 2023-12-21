@@ -2,7 +2,13 @@
   <div
     ref="container" 
     :id="`ifc-viewer-${props.name?? 'default'}`" 
-    style="position: relative; min-width: 0; min-height: 0;">
+    style="
+      position: relative; 
+      min-width: 0; 
+      min-height: 0; 
+      width: 100%; 
+      height: 100%;
+    ">
   </div>
 </template>
 
@@ -33,13 +39,6 @@ Vue.onMounted(async () => {
   const setup = props.setup ?? viewersManager.defaultViewerSetup
   await setup(viewer, viewerContainer, props.name)
   await props.extraSetup(viewer)
-  const resizeObserver = new ResizeObserver(() => {
-    viewer.renderer.resize()
-    const camera = viewer.camera
-    if (!(camera instanceof OBC.OrthoPerspectiveCamera)) {return}
-    camera.updateAspect()
-  })
-  resizeObserver.observe(viewerContainer)
 })
 
 Vue.onBeforeUnmount(() => viewersManager.destroy(props.name))
