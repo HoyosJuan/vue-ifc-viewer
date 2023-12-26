@@ -1,5 +1,5 @@
 # Vue IFC Viewer
-Vue IFC Viewer is a [VueJS](https://vuejs.org/) plugin written in typescript that let developers integrate [OpenBIM Components](https://github.com/IFCjs/components) in your app 🚀🚀.<br><br>
+Vue IFC Viewer is a [VueJS](https://vuejs.org/) plugin written in typescript that let developers integrate [OpenBIM Components](https://github.com/IFCjs/components) in their apps 🚀🚀.<br><br>
 
 ## Getting started
 These getting started steps assumes you already have some basic VueJS knowledge.<br><br>
