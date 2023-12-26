@@ -1,5 +1,15 @@
 {
   "name": "vue-ifc-viewer",
+  "description": "Vue IFC Viewer is a VueJS plugin written in typescript that let developers integrate OpenBIM Components in their apps 🚀🚀.",
+  "keywords": ["vuejs", "ifc viewer", "bim plugin vuejs", "bim viewer"],
+  "homepage": "https://github.com/HoyosJuan/vue-ifc-viewer?tab=readme-ov-file#vue-ifc-viewer",
+  "bugs": "https://github.com/HoyosJuan/vue-ifc-viewer/issues",
+  "author": "Juan Hoyos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HoyosJuan/vue-ifc-viewer"
+  },
+  "license": "MIT",
   "type": "module",
   "version": "1.0.1",
   "files": [

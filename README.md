@@ -79,7 +79,11 @@ const customViewer: ViewerSetup = async (viewer: OBC.Components, container: HTML
   //Refer to the official documentation at docs.thatopen.com to know more, in the tutorials section you can see many examples.
 }
 
-createApp(App).use(ifcViewer).mount("#app")
+const ifcPluginConfig: IfcPluginConfig = {
+  defaultViewerSetup: viewer
+}
+
+createApp(App).use(ifcViewer, ifcPluginConfig).mount("#app")
 ```
 
 <br>When you use the IFCViewer component, it will use the above configuration to initialize the viewer.<br><br>
