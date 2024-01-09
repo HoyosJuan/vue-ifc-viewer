@@ -35,7 +35,8 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
   await highlighter.setup()
 
   const culler = viewer.tools.get(OBC.ScreenCuller)
-  camera.controls.addEventListener("sleep", () => culler.needsUpdate = true)
+  await culler.setup()
+  camera.controls.addEventListener("rest", () => culler.needsUpdate = true)
 
   const propsProcessor = viewer.tools.get(OBC.IfcPropertiesProcessor)
 
@@ -49,16 +50,12 @@ export const defaultViewerSetup: ViewerSetup = async (viewer: OBC.Components, co
   const fragmentBB = viewer.tools.get(OBC.FragmentBoundingBox)
 
   const ifcLoader = viewer.tools.get(OBC.FragmentIfcLoader)
-  ifcLoader.settings.wasm = {
-    path: "https://unpkg.com/web-ifc@0.0.46/",
-    absolute: true
-  }
+  await ifcLoader.setup()
 
   let lowestModelCoordinate = 0
   ifcLoader.onIfcLoaded.add(model => {
     highlighter.update()
     for (const fragment of model.items) { culler.add(fragment.mesh) }
-    culler.needsUpdate = true
     fragmentBB.reset()
     fragmentBB.add(model)
     const { min: minBB } = fragmentBB.get()

@@ -3,7 +3,7 @@
     ref="container" 
     :id="`ifc-viewer-${props.name?? 'default'}`" 
     style="
-      position: relative; 
+      overflow: hidden;
       min-width: 0; 
       min-height: 0; 
       width: 100%; 
