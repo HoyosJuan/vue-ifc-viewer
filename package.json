@@ -12,7 +12,7 @@
   "author": "Juan Hoyos",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HoyosJuan/vue-ifc-viewer"
+    "url": "git+https://github.com/HoyosJuan/vue-ifc-viewer.git"
   },
   "license": "MIT",
   "type": "module",
